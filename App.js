@@ -8,61 +8,31 @@
  * @format
  * @flow strict-local
  */
+import 'react-native-gesture-handler';
+import React from 'react';
+import Home from './components/Home';
+import Profile from './components/Profile';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import React, { useState } from 'react';
-import { Text, View, TextInput , Button} from 'react-native';
+const Stack = createStackNavigator();
 
 const App = () => {
 
-  const [user, setUser] = useState();
-  const [pass, setPass] = useState();
-
-  const onBtnClicked = () => {
-    console.log(`user: ${user}, pass: ${pass}`);
-  };
-
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{marginRight: 150}}>Username:</Text>
-      <TextInput
-        style={{
-          height: 25,
-          width: 210,
-          borderColor: 'gray',
-          borderWidth: 1,
-        }}
-        name="user"
-        placeholder="username"
-        textContentType="emailAddress"
-        value={user}
-        onChangeText={val => setUser(val)}
-      />
-      <Text style={{marginRight: 150}}>Password:</Text>
-      <TextInput
-        style={{
-          height: 25,
-          width: 210,
-          borderColor: 'gray',
-          borderWidth: 1,
-        }}
-        name="pass"
-        placeholder="password"
-        value={pass}
-        secureTextEntry={true}
-        onChangeText={val => setPass(val)}
-      />
-      <Button
-        style={{
-          height: 30,
-          width: 80,
-          borderColor: 'green',
-          borderWidth: 1,
-        }}
-        onPress={onBtnClicked}
-        title="login"
-        accessibilityLabel="login to your account"
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Home"
+          component={Home}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{title: 'bob'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
